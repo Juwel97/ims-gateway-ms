@@ -49,6 +49,9 @@ public class User {
     private boolean active = true;
 
     @Column(nullable = false)
+    private int loginAttempt = 0;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -70,6 +73,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.role = role;
+        this.active = true;
+        this.loginAttempt = 0;
         this.createdAt = LocalDateTime.now();
     }
 }

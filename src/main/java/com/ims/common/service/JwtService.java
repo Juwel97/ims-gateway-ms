@@ -28,22 +28,22 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generateAccessToken(String email, String role) {
-        return buildToken(email, role, accessTokenExpirationMs);
+    public String generateAccessToken(String userId, String role) {
+        return buildToken(userId, role, accessTokenExpirationMs);
     }
 
-    public String generateRefreshToken(String email, String role) {
-        return buildToken(email, role, refreshTokenExpirationMs);
+    public String generateRefreshToken(String userId, String role) {
+        return buildToken(userId, role, refreshTokenExpirationMs);
     }
 
-    private String buildToken(String email, String role, long expirationMs) {
+    private String buildToken(String subject, String role, long expirationMs) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
 
         Instant now = Instant.now();
         return Jwts.builder()
             .claims(claims)
-            .subject(email)
+            .subject(subject)
             .issuedAt(Date.from(now))
             .expiration(Date.from(now.plusMillis(expirationMs)))
             .signWith(getSigningKey())

@@ -7,11 +7,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginRequest {
+public class ChangePasswordRequest {
 
     @NotNull
     private Long userId;
 
     @NotBlank
-    private String password;
+    private String oldPassword;
+
+    @NotBlank
+    private String newPassword;
 }
